@@ -1,6 +1,11 @@
 import { Container, Brand, Menu, Search, Content, NewNote } from "./styles";
+import { FiPlus, FiSearch } from "react-icons/fi";
 
 import { Header } from "../../components/Header";
+import { Section } from "../../components/Section";
+import { Note } from "../../components/Note";
+import { Input } from "../../components/Input";
+import { ButtonText } from "../../components/ButtonText";
 
 export function Home() {
   return (
@@ -11,13 +16,40 @@ export function Home() {
 
       <Header />
 
-      <Menu></Menu>
+      <Menu>
+        <li>
+          <ButtonText title="Todos" $isactive />
+        </li>
+        <li>
+          <ButtonText title="React" />
+        </li>
+        <li>
+          <ButtonText title="Node" />
+        </li>
+      </Menu>
 
-      <Search></Search>
+      <Search>
+        <Input placeholder="Pesquisar pelo título" icon={FiSearch} />
+      </Search>
 
-      <Content></Content>
+      <Content>
+        <Section title="Marcadores">
+          <Note
+            data={{
+              title: "React",
+              tags: [
+                { id: 1, name: "React" },
+                {id: 2, name: "React-Native"}
+              ],
+            }}
+          />
+        </Section>
+      </Content>
 
-      <NewNote></NewNote>
+      <NewNote>
+        <FiPlus />
+        Criar nota
+      </NewNote>
     </Container>
   );
 }

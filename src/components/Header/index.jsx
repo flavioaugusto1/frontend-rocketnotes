@@ -12,7 +12,7 @@ export function Header() {
 
         <div>
           <span>Bem-vindo</span>
-          <strong>Flávio Augusto!</strong>
+          <strong>Flávio Augusto</strong>
         </div>
       </Profile>
 
