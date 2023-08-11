@@ -1,4 +1,7 @@
 import { Container } from "./styles";
+
+import { Link } from "react-router-dom";
+
 import { Tags } from "../Tags"
 
 export function Note({ data, ...rest }) {

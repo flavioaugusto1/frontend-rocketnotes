@@ -1,6 +1,8 @@
 import { Container, Brand, Menu, Search, Content, NewNote } from "./styles";
 import { FiPlus, FiSearch } from "react-icons/fi";
 
+import { Link } from "react-router-dom";
+
 import { Header } from "../../components/Header";
 import { Section } from "../../components/Section";
 import { Note } from "../../components/Note";
@@ -34,19 +36,21 @@ export function Home() {
 
       <Content>
         <Section title="Marcadores">
-          <Note
-            data={{
-              title: "React",
-              tags: [
-                { id: 1, name: "React" },
-                {id: 2, name: "React-Native"}
-              ],
-            }}
-          />
+          <Link to="/details/1">
+            <Note
+              data={{
+                title: "React",
+                tags: [
+                  { id: 1, name: "React" },
+                  { id: 2, name: "React-Native" },
+                ],
+              }}
+            />
+          </Link>
         </Section>
       </Content>
 
-      <NewNote>
+      <NewNote to="/new">
         <FiPlus />
         Criar nota
       </NewNote>

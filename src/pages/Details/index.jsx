@@ -1,4 +1,5 @@
 import { Container, Links, Content } from "./styles";
+import { Link } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
@@ -39,7 +40,9 @@ export function Details() {
             <Tags title="React-native" />
           </Section>
 
-          <Button title="Voltar" />
+          <Link to="/">
+            <Button title="Voltar" />
+          </Link>
         </Content>
       </main>
     </Container>
