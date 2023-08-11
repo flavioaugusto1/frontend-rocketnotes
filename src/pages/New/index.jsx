@@ -1,14 +1,14 @@
 import { Container, Form } from "./styles";
 
-import { Header } from "../../components/Header"
-import { Input } from "../../components/Input"
+import { Header } from "../../components/Header";
+import { Input } from "../../components/Input";
 import { Textarea } from "../../components/TextArea";
 import { Section } from "../../components/Section";
 import { NoteItem } from "../../components/NoteItem";
+import { Button } from "../../components/Button";
 
-
-export function New(){
-  return(
+export function New() {
+  return (
     <Container>
       <Header />
 
@@ -19,16 +19,24 @@ export function New(){
             <a href="/">Voltar</a>
           </header>
 
-          <Input placeholder="título"/>
-          <Textarea placeholder="Observações"/>
-          
+          <Input placeholder="título" />
+          <Textarea placeholder="Observações" />
+
           <Section title="Links úteis">
             <NoteItem value="google.com" />
-            <NoteItem isNew placeholder="Novo link"/>
+            <NoteItem isNew placeholder="Novo link" />
           </Section>
+
+          <Section title="Marcadores">
+            <div className="tags">
+              <NoteItem value="React-Native" />
+              <NoteItem isNew placeholder="Nova tag" />
+            </div>
+          </Section>
+
+          <Button title="Salvar" />
         </Form>
       </main>
-
     </Container>
-  )
+  );
 }
