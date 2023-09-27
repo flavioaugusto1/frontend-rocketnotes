@@ -10,7 +10,6 @@ export function Header() {
 
   const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
 
-  console.log(avatarURL)
   return (
     <Container>
       <Profile to="/profile">
