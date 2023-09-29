@@ -12,13 +12,19 @@ import { ButtonText } from "../../components/ButtonText";
 export function Home() {
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
+  const [search, setSearch] = useState("");
+  const [notes, setNotes] = useState([]);
 
   function handleTagSelected(tagName) {
+    if (tagName === "all") {
+      return setTagsSelected([]);
+    }
+
     const alreadySelected = tagsSelected.includes(tagName);
 
     if (alreadySelected) {
       const filteredTags = tagsSelected.filter((tag) => tag !== tagName);
-      setTagsSelected(filteredTags)
+      setTagsSelected(filteredTags);
     } else {
       setTagsSelected((prevState) => [...prevState, tagName]);
     }
@@ -32,6 +38,17 @@ export function Home() {
 
     fetchTags();
   }, []);
+
+  useEffect(() => {
+    async function fetchNotes() {
+      const response = await api.get(
+        `/notes?title=${search}&tags=${tagsSelected}`
+      );
+      setNotes(response.data);
+    }
+
+    fetchNotes();
+  }, [tagsSelected, search]);
 
   return (
     <Container>
@@ -63,22 +80,18 @@ export function Home() {
       </Menu>
 
       <Search>
-        <Input placeholder="Pesquisar pelo título" icon={FiSearch} />
+        <Input
+          placeholder="Pesquisar pelo título"
+          icon={FiSearch}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </Search>
 
       <Content>
-        <Section title="Marcadores">
-          <Link to="/details/1">
-            <Note
-              data={{
-                title: "React",
-                tags: [
-                  { id: 1, name: "React" },
-                  { id: 2, name: "React-Native" },
-                ],
-              }}
-            />
-          </Link>
+        <Section title="Minhas notas">
+          {notes.map((note) => (
+            <Note key={String(note.id)} data={note} />
+          ))}
         </Section>
       </Content>
 
