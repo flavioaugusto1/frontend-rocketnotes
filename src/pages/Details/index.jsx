@@ -16,14 +16,14 @@ export function Details() {
   const navigate = useNavigate();
 
   function handleBack(){
-    navigate("/")
+    navigate(-1)
   }
 
   async function handleRemove(){
     const confirm = window.confirm("Deseja realmente remover a nota?")
     if(confirm){
       await api.delete(`notes/delete/${params.id}`);
-      navigate("/")
+      navigate(-1)
     }
   }
 
@@ -59,6 +59,7 @@ export function Details() {
                       <a
                         href={link.url}
                         target="_blank"
+                        rel="noreferrer"
                       >
                         {link.url}
                         {console.log(link.url)}
