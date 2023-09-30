@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { Container, Links, Content } from "./styles";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
@@ -8,43 +11,84 @@ import { Tags } from "../../components/Tags";
 import { Button } from "../../components/Button";
 
 export function Details() {
+  const [data, setData] = useState(null);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  function handleBack(){
+    navigate("/")
+  }
+
+  async function handleRemove(){
+    const confirm = window.confirm("Deseja realmente remover a nota?")
+    if(confirm){
+      await api.delete(`notes/delete/${params.id}`);
+      navigate("/")
+    }
+  }
+
+  useEffect(() => {
+    async function fetchNote() {
+      const response = await api.get(`/notes/show/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchNote();
+  }, []);
+
   return (
     <Container>
       <Header />
 
-      <main>
-        <Content>
-          <ButtonText title="Excluir a nota" />
+      {data && (
+        <main>
+          <Content>
+            <ButtonText
+              title="Excluir a nota"
+              onClick={handleRemove}
+            />
 
-          <h1>Introdução a React</h1>
-          <p>
-            Lorem Ipsum é simplesmente uma simulação de texto da indústria
-            tipográfica e de impressos, e vem sendo utilizado desde o século
-            XVI, quando um impressor desconhecido pegou uma bandeja de tipos e
-            os embaralhou para fazer um livro de modelos de tipos.
-          </p>
+            <h1>{data.title}</h1>
+            <p>{data.description}</p>
 
-          <Section title="Links úteis">
-            <Links>
-              <li>
-                <a href="#">https://google.com</a>
-              </li>
-              <li>
-                <a href="#">https://facebook.com</a>
-              </li>
-            </Links>
-          </Section>
+            {data.links && (
+              <Section title="Links úteis">
+                <Links>
+                  {data.links.map(link => (
+                    <li key={String(link.id)}>
+                      <a
+                        href={link.url}
+                        target="_blank"
+                      >
+                        {link.url}
+                        {console.log(link.url)}
+                      </a>
+                    </li>
+                  ))}
+                </Links>
+              </Section>
+            )}
 
-          <Section title="Marcadores">
-            <Tags title="Node.js" />
-            <Tags title="React-native" />
-          </Section>
-
-          <Link to="/">
-            <Button title="Voltar" />
-          </Link>
-        </Content>
-      </main>
+            {
+              data.tags &&
+              <Section title="Marcadores">
+                {
+                  data.tags.map(tag => (
+                    <Tags 
+                      key={String(tag.id)}  
+                      title={tag.name}
+                    />
+                  ))
+                }
+              </Section>
+            }
+              <Button
+                title="Voltar"
+                onClick={handleBack}
+              />
+          </Content>
+        </main>
+      )}
     </Container>
   );
 }
