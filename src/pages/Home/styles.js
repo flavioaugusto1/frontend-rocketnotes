@@ -29,7 +29,6 @@ export const Brand = styled.div`
     font-size: 2.4rem;
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
-
 `;
 
 export const Menu = styled.ul`
@@ -42,7 +41,6 @@ export const Menu = styled.ul`
   > li {
     margin-bottom: 2.4rem;
   }
-
 `;
 
 export const Search = styled.div`
@@ -57,13 +55,13 @@ export const Content = styled.div`
   padding: 0 6.4rem;
 
   overflow-y: auto;
-
 `;
 
 export const NewNote = styled(Link)`
   grid-area: newnote;
 
   background: ${({ theme }) => theme.COLORS.ORANGE};
+  color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   border: none;
 
@@ -74,5 +72,4 @@ export const NewNote = styled(Link)`
 
   font-size: 1.6rem;
   font-weight: 500;
-
 `;
