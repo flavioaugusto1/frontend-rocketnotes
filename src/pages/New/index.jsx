@@ -7,7 +7,7 @@ import { TextArea } from "../../components/TextArea";
 import { Section } from "../../components/Section";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
-import { ButtonText } from "../../components/ButtonText"
+import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api";
 
 export function New() {
@@ -22,8 +22,8 @@ export function New() {
 
   const navigate = useNavigate();
 
-  function handleBack(){
-    navigate(-1)
+  function handleBack() {
+    navigate(-1);
   }
 
   function handleAddLink() {
@@ -40,31 +40,35 @@ export function New() {
     setNewTag("");
   }
 
-  function handleRemoveTag(deleted){
-    setTags((prevState) => prevState.filter((tag) => tag !== deleted))
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted));
   }
 
-  async function handleNewNote(){
-    if(!title){
-      return alert("Digite um título para adicionar a nota.")
+  async function handleNewNote() {
+    if (!title) {
+      return alert("Digite um título para adicionar a nota.");
     }
 
-    if(newLink){
-      return alert("Você deixou um link no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio.")
+    if (newLink) {
+      return alert(
+        "Você deixou um link no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio."
+      );
     }
-    
-    if(newTag){
-      return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio.")
+
+    if (newTag) {
+      return alert(
+        "Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio."
+      );
     }
 
     await api.post("/notes", {
       title,
       description,
       tags,
-      links
-    })
+      links,
+    });
 
-    alert("Nota criada com sucesso.")
+    alert("Nota criada com sucesso.");
     navigate(-1);
   }
 
@@ -76,19 +80,16 @@ export function New() {
         <Form>
           <header>
             <h1>Criar nota</h1>
-            <ButtonText
-              title="Voltar"
-              onClick={handleBack}
-            />
+            <ButtonText title="Voltar" onClick={handleBack} />
           </header>
 
-          <Input 
+          <Input
             placeholder="título"
-            onChange={e => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <TextArea 
+          <TextArea
             placeholder="Observações"
-            onChange={e => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
 
           <Section title="Links úteis">
@@ -114,7 +115,9 @@ export function New() {
                 <NoteItem
                   key={String(index)}
                   value={tag}
-                  onClick={() => {handleRemoveTag(tag)}}
+                  onClick={() => {
+                    handleRemoveTag(tag);
+                  }}
                 />
               ))}
 
@@ -128,10 +131,7 @@ export function New() {
             </div>
           </Section>
 
-          <Button 
-            title="Salvar"
-            onClick={handleNewNote}
-          />
+          <Button title="Salvar" onClick={handleNewNote} />
         </Form>
       </main>
     </Container>
