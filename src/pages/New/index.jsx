@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form } from "./styles";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { Textarea } from "../../components/TextArea";
+import { TextArea } from "../../components/TextArea";
 import { Section } from "../../components/Section";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
@@ -86,7 +86,7 @@ export function New() {
             placeholder="título"
             onChange={e => setTitle(e.target.value)}
           />
-          <Textarea 
+          <TextArea 
             placeholder="Observações"
             onChange={e => setDescription(e.target.value)}
           />
