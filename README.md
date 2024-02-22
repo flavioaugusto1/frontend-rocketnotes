@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Rocket Notes :note:</h1>
+  <h1 align="center">Rocket Notes 📝</h1>
 </p>
 
 Bem-vindo ao RocketNotes! Esta plataforma foi desenvolvida para atender a pessoas que precisam salvar suas anotações de forma fácil e intuitiva.
